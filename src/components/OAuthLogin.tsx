@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { setUserDetails } from '../store/userActions';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { BACKEND_API_URL } from '../config/backend';
 
 const OAuthLogin: React.FC = () => {
 
@@ -18,7 +19,7 @@ const OAuthLogin: React.FC = () => {
         const code = urlParams.get('code');
         if (code) {
             // Exchange the code for an access token
-            axios.post('http://localhost:8081/api/oauth/exchange-token', { code })
+            axios.post(`${BACKEND_API_URL}/api/oauth/exchange-token`, { code })
                 .then(response => {
 
                     let token = response.data.token;
@@ -26,7 +27,7 @@ const OAuthLogin: React.FC = () => {
                     localStorage.setItem('token', token);
                     console.log('Token received:', token);
 
-                    /* const userResponse = await axios.get('http://localhost:8081/api/auth/details', {
+                    /* const userResponse = await axios.get(`${BACKEND_API_URL}/api/auth/details`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
@@ -53,7 +54,7 @@ const OAuthLogin: React.FC = () => {
                     }
 
                     /* if (token) {
-                        axios.get('http://localhost:8081/api/oauth/user-details', {
+                        axios.get(`${BACKEND_API_URL}/api/oauth/user-details`, {
                             headers: {
                                 Authorization: `Bearer ${token}`
                             }

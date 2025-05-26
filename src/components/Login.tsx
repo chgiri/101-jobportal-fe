@@ -3,6 +3,7 @@ import { useState } from "react";
 import { setUserDetails } from "../store/userActions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_API_URL } from "../config/backend";
 
 const Login = () => {
 
@@ -17,7 +18,7 @@ const Login = () => {
         try {
             // Make a POST request to the login endpoint with Basic Auth
             // Password is encoded in Base64 format
-            const response = await axios.post('http://localhost:8081/api/auth/login', {},
+            const response = await axios.post(`${BACKEND_API_URL}/api/auth/login`, {},
                 {
                     headers: {
                     'Authorization': `Basic ${window.btoa(`${username}:${password}`)}`
@@ -29,7 +30,7 @@ const Login = () => {
             localStorage.setItem('token', token);
             console.log('Token received:', token);
 
-            const userResponse = await axios.get('http://localhost:8081/api/auth/details', {
+            const userResponse = await axios.get(`${BACKEND_API_URL}/api/auth/details`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
