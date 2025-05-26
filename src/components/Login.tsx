@@ -68,7 +68,7 @@ const Login = () => {
 
     const handleGoogleLogin = () => {
         // Redirect to Google OAuth login
-        window.location.href = 'http://localhost:8081/oauth2/authorization/google';
+        window.location.href = `${BACKEND_API_URL}/oauth2/authorization/google`;
     }
 
     return (

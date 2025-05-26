@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import axios from 'axios';
+import { BACKEND_API_URL } from '../config/backend';
 
 const ApplicantDashboard: React.FC = () => {
 
@@ -12,7 +13,7 @@ const ApplicantDashboard: React.FC = () => {
 
     const getAllJobs = async () => {
         try {
-            const response = await axios('http://localhost:8081/api/jobs');
+            const response = await axios(`${BACKEND_API_URL}/api/jobs`);
             setJobs(response.data);
         } catch (error) {
             console.error('Error fetching jobs:', error);
@@ -27,7 +28,7 @@ const ApplicantDashboard: React.FC = () => {
         }
 
         try {
-            const response = await axios.post(`http://localhost:8081/api/applications/apply/${jobId}`, {}, {
+            const response = await axios.post(`${BACKEND_API_URL}/api/applications/apply/${jobId}`, {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
