@@ -80,7 +80,7 @@ const OAuthLogin: React.FC = () => {
                     console.error('Error exchanging code for token:', error);
                     alert('Login failed. Please try again.');
                     localStorage.removeItem('token'); // Clear token on error
-                    navigate('/login'); // Redirect to login on error
+                    navigate('/'); // Redirect to login on error
                 });
         } else {
             console.error('No authorization code found in the URL');
