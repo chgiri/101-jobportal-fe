@@ -3,9 +3,17 @@ import Navbar from './Navbar';
 import axios from 'axios';
 import { BACKEND_API_URL } from '../config/backend';
 
+type Job = {
+    id: number;
+    title: string;
+    description: string;
+    company: string;
+    postedDate: string;
+};
+
 const ApplicantDashboard: React.FC = () => {
 
-    const [jobs, setJobs] = React.useState([]);
+    const [jobs, setJobs] = React.useState<Job[]>([]);
 
     useEffect(() => {
         getAllJobs();
@@ -33,7 +41,7 @@ const ApplicantDashboard: React.FC = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            alert('Application submitted successfully!');
+            alert(`Application submitted successfully for ${response.data.jobId}!`);
         } catch (error) {
             console.error('Error applying for job:', error);
             alert('Failed to apply for the job. Please try again later.');
